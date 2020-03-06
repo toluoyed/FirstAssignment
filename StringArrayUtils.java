@@ -105,6 +105,28 @@ public class StringArrayUtils {
      * @return true if each letter in the alphabet has been used in the array
      */ // TODO
     public static boolean isPangramic(String[] array) {
+        boolean[] alpha = new boolean[26];
+        String str = "";
+        for(int i = 0; i < array.length;i++){
+            str+=array[i];
+        }
+        str = str.replace("","");
+        int num = 0;
+        int count = 0;
+        for(int i = 0; i < str.length();i++){
+            if(str.charAt(i) >= 'A' && str.charAt(i) <= 'Z'){
+                num = str.charAt(i) - 'A';
+            }
+            else if(str.charAt(i) >= 'a' && str.charAt(i) <='z'){
+                num = str.charAt(i) - 'a';
+            }
+            alpha[num] = true;
+        }
+        for (int i = 0; i <=25; i++){
+            if(!alpha[i]){
+                return false;
+            }
+        }
         return false;
     }
 
@@ -152,16 +174,16 @@ public class StringArrayUtils {
      */ // TODO
     public static String[] removeConsecutiveDuplicates(String[] array) {
         int size = array.length;
-        //String anotherArray[] = new String[size];
+        String anotherArray[] = new String[size];
         for(int i = array.length-1; i > 0; i--){
             if (array[i].equals(array[i-1])){
-                 for (int j = 0; j < size; j++){
-                     if(array[j].equals(array[i-1])){
-                         for (int z = j; z < size -1; z++){
-                             array[z] = array[z+1]; 
-                         }
-                     }
-                 }
+                 anotherArray = new String[array.length - 1]; 
+  
+                System.arraycopy(array, 0, anotherArray, 0, i-2); 
+           
+                System.arraycopy(array, i, 
+                                 anotherArray, i, 
+                                 array.length - i - 1);
             }
         }
         return array;
