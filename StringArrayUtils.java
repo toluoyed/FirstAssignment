@@ -4,6 +4,9 @@
  */
 import java.util.Arrays;
 import java.util.ArrayList;
+import java.util.List; 
+import java.util.stream.Collectors; 
+import java.util.stream.IntStream;
 public class StringArrayUtils {
     /**
      * @param array array of String objects
@@ -149,19 +152,19 @@ public class StringArrayUtils {
      */ // TODO
     public static String[] removeConsecutiveDuplicates(String[] array) {
         int size = array.length;
-        String anotherArray[] = new String[size];
+        //String anotherArray[] = new String[size];
         for(int i = array.length-1; i > 0; i--){
             if (array[i].equals(array[i-1])){
-                anotherArray = new String[array.length - 1]; 
-  
-                System.arraycopy(array, 0, anotherArray, 0, i-2); 
-           
-                System.arraycopy(array, i-1 , 
-                                 anotherArray, i, 
-                                 i );
+                 for (int j = 0; j < size; j++){
+                     if(array[j].equals(array[i-1])){
+                         for (int z = j; z < size -1; z++){
+                             array[z] = array[z+1]; 
+                         }
+                     }
+                 }
             }
         }
-        return anotherArray;
+        return array;
     }
 
     /**
